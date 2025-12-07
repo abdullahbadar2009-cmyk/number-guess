@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-items: center;
+            background: #0b0f10;
+            color: #eae0c8;
+            font-family: 'poppins';
+            min-height: 100%;
+        }
+
+        .parent {
+            padding: 20px;
+            text-align: center;
+            background: #1a1f20;
+            border-radius: 15px;
+            box-shadow: 0px 18px 40px #be971523;
+        }
+
+        p {
+            padding: 10px;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 15px;
+            /* border: 2px solid white; */
+            outline: none;
+            font-family: 'poppins';
+            font-weight: bolder;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border: 2px solid #20b9b9;
+            box-shadow: 0 0 0 1px #38bdf8;
+        }
+
+        .btn {
+            padding: 10px;
+            font-family: 'poppins';
+            font-weight: bolder;
+            background-color: #d4af37;
+            width: 40%;
+            border-radius: 15px;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            box-shadow: 0px 10px 20px #d4af37;
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <h2>Guess the number B/W 1-30</h2>
+        <input type="number" placeholder="Enter number" id="int">
+        <p id="output"></p>
+        <button class="btn" id="btt">Click it</button>
+    </div>
+</body>
+<script>
+    let attempts = 0;
+    let secretNumber = Math.floor(Math.random() * 30) + 1;
+    let int = document.getElementById("int")
+    let btt = document.getElementById("btt")
+    let output = document.getElementById("output")
+
+    btt.addEventListener("click", () => {
+        let num = Number(int.value.trim())
+        if (num === "") {
+            alert("Enter a number")
+            return;
+        }
+        attempts++
+
+        if (num === secretNumber) {
+            output.textContent = `🎉 Correct! You guessed it in ${attempts} tries!`;
+            btt.disabled = true;
+            output.style.color = "#00ff90";
+        }
+
+        else if (num > secretNumber) {
+            output.textContent = "📉 Too High!";
+            output.style.color = "#ffd166";
+        }
+
+        else {
+            output.textContent = "📈 Too Low!";
+            output.style.color = "#ffd166";
+        }
+        int.value=""
+        int.focus();
+
+    })
+
+</script>
+
+</html>
